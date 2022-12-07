@@ -1,23 +1,59 @@
-import logo from './logo.svg';
-import './App.css';
+import "./App.css";
+//import styled from "styled-components";
+import Header from "./components/header/Header";
+import Form from "./components/form/Form";
+import { useSelector, useDispatch } from "react-redux";
+import List from "./components/list/List";
+import { deleteContent, isDoneContent } from "./redux/modules/counter";
 
 function App() {
+  const contents = useSelector((state) => state.todos.todos);
+  console.log(contents);
+
+  const dispatch = useDispatch();
+  //const newContentList = todos.filter((content) => content.id !== todos.id);
+  const onClickDeleteUserHandler = (id) => {
+    dispatch(deleteContent(id));
+  };
+  const isDoneHandler = (id) => {
+    dispatch(isDoneContent(id));
+  };
+  // const onChangeHandler = (id) => {
+  //   const copy = [...contents];
+  //   setContents(copy);
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <Header />
+      <div>
+        <Form />
+      </div>
+      <div>
+        <h2>Working..🔥</h2>
+
+        {contents.map((content) =>
+          content.isDone === true ? (
+            <List
+              onClickDeleteUserHandler={onClickDeleteUserHandler}
+              content={content}
+              key={content.id}
+              isDoneHandler={isDoneHandler}
+            ></List>
+          ) : null
+        )}
+
+        <h2>done..!🎉</h2>
+        {contents.map((content) =>
+          content.isDone === false ? (
+            <List
+              onClickDeleteUserHandler={onClickDeleteUserHandler}
+              content={content}
+              key={content.id}
+              isDoneHandler={isDoneHandler}
+            ></List>
+          ) : null
+        )}
+      </div>
     </div>
   );
 }
