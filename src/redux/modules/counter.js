@@ -17,9 +17,12 @@ export const deleteContent = (payload) => {
     payload: payload,
   };
 };
-export const isDoneContent = (payload) => {
-  return { type: ISDONE_CONTENT, payload: payload };
+export const isDoneContent = (id) => {
+  console.log("payload", id);
+  return { type: ISDONE_CONTENT, id: id };
 };
+// (id)는 isDonContent에 받아온 값을 payload에 지정해서 보내준다?
+
 // Initial/State
 const initialState = {
   todos: [
@@ -65,7 +68,10 @@ const todos = (state = initialState, action) => {
     }
     case ISDONE_CONTENT: {
       return {
-        todos: [...state.todos],
+        ...state,
+        todos: state.todos.map((todo) =>
+          todo.id === action.id ? { ...todo, isDone: !todo.isDone } : todo
+        ), // action.id는 payload??????(id와 payload 이름은 의미 없고 같은 )
       };
     }
     default:

@@ -17,28 +17,16 @@ const List = (props) => {
       </button>
       <button
         onClick={() => {
-          props.isDoneHandler(props.content.isDone);
-          if (props.content.isDone === true) {
-            props.content.isDone = false; //isDone이 true가 맞으면 눌렀을때 isDone의 값을 false로 바꾼다.
-          } else if (props.content.isDone === false) {
-            props.content.isDone = true; //isDone이 false가 맞으면 눌렀을 때 isDone의 값을 true로 바꾼다.
-          }
+          console.log("id", props.content.id);
+          props.isDoneHandler(props.content.id);
         }}
       >
-        {/* onClick=
-        {() => {
-          props.onChangeHandler(props.content.isDone);
-          if (props.content.isDone === true) {
-            props.content.isDone = false; //isDone이 true가 맞으면 눌렀을때 isDone의 값을 false로 바꾼다.
-          } else if (props.content.isDone === false) {
-            props.content.isDone = true; //isDone이 false가 맞으면 눌렀을 때 isDone의 값을 true로 바꾼다.
-          }
-        }} */}
         {props.content.isDone ? "완료" : "취소"}
       </button>
     </CardBox>
   );
 };
+
 const CardBox = styled.div`
   width: 270px;
   border: 4px solid teal;
@@ -46,5 +34,4 @@ const CardBox = styled.div`
   border-radius: 12px;
   padding: 12px 24px 24px;
 `;
-
 export default List;

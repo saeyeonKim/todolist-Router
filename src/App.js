@@ -1,5 +1,5 @@
 import "./App.css";
-//import styled from "styled-components";
+import styled from "styled-components";
 import Header from "./components/header/Header";
 import Form from "./components/form/Form";
 import { useSelector, useDispatch } from "react-redux";
@@ -16,6 +16,7 @@ function App() {
     dispatch(deleteContent(id));
   };
   const isDoneHandler = (id) => {
+    console.log(id, "id");
     dispatch(isDoneContent(id));
   };
   // const onChangeHandler = (id) => {
@@ -30,32 +31,42 @@ function App() {
       </div>
       <div>
         <h2>Working..🔥</h2>
-
-        {contents.map((content) =>
-          content.isDone === true ? (
-            <List
-              onClickDeleteUserHandler={onClickDeleteUserHandler}
-              content={content}
-              key={content.id}
-              isDoneHandler={isDoneHandler}
-            ></List>
-          ) : null
-        )}
+        <Wrap>
+          {contents?.map((content) =>
+            content.isDone === true ? (
+              <List
+                onClickDeleteUserHandler={onClickDeleteUserHandler}
+                content={content}
+                key={content.id}
+                isDoneHandler={isDoneHandler}
+              ></List>
+            ) : null
+          )}
+        </Wrap>
 
         <h2>done..!🎉</h2>
-        {contents.map((content) =>
-          content.isDone === false ? (
-            <List
-              onClickDeleteUserHandler={onClickDeleteUserHandler}
-              content={content}
-              key={content.id}
-              isDoneHandler={isDoneHandler}
-            ></List>
-          ) : null
-        )}
+        <Wrap>
+          {contents?.map((content) =>
+            content.isDone === false ? (
+              <List
+                onClickDeleteUserHandler={onClickDeleteUserHandler}
+                content={content}
+                key={content.id}
+                isDoneHandler={isDoneHandler}
+              ></List>
+            ) : null
+          )}
+        </Wrap>
       </div>
     </div>
   );
 }
+const Wrap = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-left: 320px;
+  margin-right: 350px;
+`;
 
 export default App;

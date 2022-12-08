@@ -28,7 +28,9 @@ const Form = () => {
         <label>내용</label>
         <input value={todo} onChange={(e) => setTodo(e.target.value)}></input>
       </div>
-      <button onClick={onClickAddUserHandler}>추가하기</button>
+      <AddButton>
+        <button onClick={onClickAddUserHandler}>추가하기</button>
+      </AddButton>
     </AddBox>
   );
 };
@@ -42,6 +44,14 @@ const AddBox = styled.div`
   padding: 30px;
   gap: 20px;
   width: 1200px;
+`;
+const AddButton = styled.div`
+  border: none;
+  border-radius: 10px;
+  height: 40px;
+  width: 140px;
+  color: white;
+  background-color: teal;
 `;
 
 export default Form;
